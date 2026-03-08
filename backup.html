@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SRISTI 2K26 – National Level Technical Symposium & Cultural Fest | SRIET</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Exo+2:ital,wght@0,300;0,400;0,600;0,700;0,900;1,400&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #050b1f;
+    --deep: #080e24;
+    --blue1: #0a1535;
+    --blue2: #0e1e4a;
+    --accent: #4f8ef7;
+    --accent2: #7c5cfc;
+    --accent3: #c355f5;
+    --gold: #f5c518;
+    --gold2: #ffdd57;
+    --cyan: #22d3ee;
+    --white: #f0f4ff;
+    --glass: rgba(255,255,255,0.06);
+    --glass-border: rgba(255,255,255,0.13);
+    --text-muted: rgba(200,215,255,0.65);
+    --radius: 18px;
+    --radius-sm: 10px;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Exo 2', sans-serif; background: var(--navy); color: var(--white); overflow-x: hidden; min-height: 100vh; }
+  #particle-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; }
+  .bg-gradient {
+    position: fixed; inset: 0; z-index: 0; pointer-events: none;
+    background:
+      radial-gradient(ellipse 80% 60% at 20% 10%, rgba(79,142,247,0.13) 0%, transparent 70%),
+      radial-gradient(ellipse 60% 50% at 80% 80%, rgba(124,92,252,0.15) 0%, transparent 70%),
+      linear-gradient(160deg, #050b1f 0%, #080e2e 40%, #0a0520 100%);
+  }
+
+  /* ===== INSTITUTE BANNER ===== */
+  .institute-banner {
+    position: relative; z-index: 100;
+    background: linear-gradient(135deg, #020818 0%, #080e24 40%, #030b1a 100%);
+    border-bottom: 2px solid rgba(79,142,247,0.3);
+    padding: 18px 28px; min-height: 160px;
+    display: flex; align-items: center; justify-content: space-between; gap: 16px;
+    box-shadow: 0 4px 40px rgba(0,0,0,0.6);
+  }
+  .institute-banner::before {
+    content: ''; position: absolute; inset: 0;
+    background: repeating-linear-gradient(0deg, transparent, transparent 30px, rgba(79,142,247,0.03) 30px, rgba(79,142,247,0.03) 31px),
+                repeating-linear-gradient(90deg, transparent, transparent 30px, rgba(79,142,247,0.03) 30px, rgba(79,142,247,0.03) 31px);
+    pointer-events: none;
+  }
+  .banner-logo { width: 110px; height: 110px; flex-shrink: 0; position: relative; z-index: 1; }
+  .banner-logo svg { width: 100%; height: 100%; }
+  .banner-center { text-align: center; flex: 1; position: relative; z-index: 1; padding: 12px 8px; }
+  .banner-institute-name {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: clamp(13px, 2.3vw, 25px); font-weight: 700; color: #fff;
+    text-transform: uppercase; letter-spacing: 2px; line-height: 1.2;
+    text-shadow: 0 0 30px rgba(79,142,247,0.5);
+  }
+  .banner-sub { font-size: clamp(10px, 1.1vw, 13px); color: rgba(190,210,255,0.8); margin-top: 5px; font-style: italic; }
+  .banner-info { font-size: clamp(9px, 0.95vw, 11.5px); color: rgba(160,190,255,0.65); margin-top: 6px; line-height: 1.7; }
+  .banner-divider { width: 100px; height: 2px; background: linear-gradient(90deg, transparent, var(--accent), var(--accent2), transparent); margin: 8px auto; }
+  .naac-badge { flex-shrink: 0; position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center; gap: 4px; }
+  .badge-ring { width: 90px; height: 90px; border-radius: 50%; background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d); padding: 3px; box-shadow: 0 0 20px rgba(253,187,45,0.35); }
+  .badge-inner { width: 100%; height: 100%; border-radius: 50%; background: linear-gradient(160deg, #0a1535, #050b1f); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1px; }
+  .badge-label { font-family: 'Rajdhani', sans-serif; font-size: 10px; color: rgba(200,200,200,0.8); letter-spacing: 1px; text-transform: uppercase; }
+  .badge-grade { font-family: 'Rajdhani', sans-serif; font-size: 28px; font-weight: 700; color: var(--gold2); line-height: 1; text-shadow: 0 0 15px rgba(255,221,87,0.6); }
+  .badge-text { font-size: 10px; color: rgba(160,190,255,0.7); text-align: center; letter-spacing: 0.5px; }
+  .developer-credit { position: absolute; left: 180px; top: 50%; transform: translateY(-50%); font-size: 10px; color: rgba(255,255,255,0.65); letter-spacing: 1px; font-weight: 500; text-shadow: 0 0 8px rgba(120,150,255,0.4); }
+
+  /* ===== STICKY NAV ===== */
+  .sticky-nav {
+    position: sticky; top: 0; z-index: 999;
+    background: rgba(5,11,31,0.92); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+    border-bottom: 1px solid rgba(79,142,247,0.2);
+    padding: 0 32px; display: flex; align-items: center; justify-content: space-between; height: 58px;
+    box-shadow: 0 4px 30px rgba(0,0,0,0.4);
+  }
+  .nav-brand { font-family: 'Rajdhani', sans-serif; font-size: 22px; font-weight: 700; background: linear-gradient(90deg, var(--accent), var(--accent2)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; letter-spacing: 2px; }
+  .nav-links { display: flex; gap: 4px; list-style: none; }
+  .nav-links a { display: block; padding: 7px 14px; color: rgba(200,215,255,0.8); text-decoration: none; font-size: 13px; font-weight: 600; letter-spacing: 0.5px; border-radius: 6px; transition: all 0.2s; text-transform: uppercase; }
+  .nav-links a:hover { color: #fff; background: rgba(79,142,247,0.15); }
+  .nav-hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 6px; border: none; background: none; }
+  .nav-hamburger span { display: block; width: 24px; height: 2px; background: var(--accent); border-radius: 2px; }
+  .mobile-menu { display: none; position: fixed; top: 58px; left: 0; right: 0; z-index: 998; background: rgba(5,11,31,0.97); backdrop-filter: blur(20px); padding: 16px; border-bottom: 1px solid rgba(79,142,247,0.2); }
+  .mobile-menu.open { display: block; }
+  .mobile-menu a { display: block; padding: 12px 16px; color: rgba(200,215,255,0.85); text-decoration: none; font-size: 14px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; border-radius: 8px; transition: all 0.2s; }
+  .mobile-menu a:hover { background: rgba(79,142,247,0.15); color: #fff; }
+
+  /* ===== HERO ===== */
+  .hero {
+    position: relative; z-index: 10; min-height: 100vh;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    text-align: center; padding: 80px 24px 60px; overflow: hidden;
+  }
+  .hero::before {
+    content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+    width: 700px; height: 700px; background: radial-gradient(circle, rgba(124,92,252,0.12) 0%, transparent 70%);
+    pointer-events: none; animation: pulse-glow 4s ease-in-out infinite;
+  }
+  @keyframes pulse-glow { 0%,100%{transform:translate(-50%,-50%) scale(1);opacity:.8} 50%{transform:translate(-50%,-50%) scale(1.15);opacity:1} }
+  .hero-tag { display: inline-flex; align-items: center; gap: 8px; background: rgba(79,142,247,0.12); border: 1px solid rgba(79,142,247,0.3); border-radius: 50px; padding: 6px 18px; font-size: 12px; letter-spacing: 2px; text-transform: uppercase; color: var(--accent); margin-bottom: 24px; animation: fadeUp 0.8s ease both; }
+  .hero-tag::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 8px var(--accent); animation: blink 1.5s infinite; }
+  @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.3} }
+  .hero-title { font-family: 'Rajdhani', sans-serif; font-size: clamp(64px, 12vw, 130px); font-weight: 700; line-height: 0.9; letter-spacing: 6px; background: linear-gradient(135deg, #fff 0%, var(--accent) 40%, var(--accent2) 70%, var(--accent3) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 12px; animation: fadeUp 0.9s 0.1s ease both; }
+  .hero-year { font-family: 'Share Tech Mono', monospace; font-size: clamp(18px, 4vw, 40px); color: var(--gold2); letter-spacing: 8px; text-shadow: 0 0 20px rgba(255,221,87,0.4); margin-bottom: 24px; animation: fadeUp 0.9s 0.2s ease both; }
+  .hero-subtitle { font-size: clamp(13px, 2vw, 20px); color: rgba(200,215,255,0.85); font-weight: 300; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 10px; animation: fadeUp 0.9s 0.3s ease both; }
+  .hero-institute { font-size: clamp(11px, 1.3vw, 14px); color: var(--text-muted); margin-bottom: 8px; animation: fadeUp 0.9s 0.35s ease both; }
+  .hero-badges { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-bottom: 20px; animation: fadeUp 0.9s 0.4s ease both; }
+  .hero-badge { font-size: 11px; background: rgba(79,142,247,0.1); border: 1px solid rgba(79,142,247,0.25); color: var(--accent); border-radius: 20px; padding: 4px 12px; letter-spacing: 0.5px; }
+  .hero-location { font-size: 13px; color: var(--text-muted); margin-bottom: 6px; animation: fadeUp 0.9s 0.45s ease both; }
+  .hero-date { font-family: 'Rajdhani', sans-serif; font-size: clamp(16px, 2.5vw, 22px); color: var(--gold2); letter-spacing: 3px; font-weight: 600; text-shadow: 0 0 15px rgba(255,221,87,0.3); margin-bottom: 36px; animation: fadeUp 0.9s 0.5s ease both; }
+  .hero-cards { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; margin-bottom: 48px; animation: fadeUp 0.9s 0.55s ease both; }
+  .hero-card { background: var(--glass); border: 1px solid var(--glass-border); border-radius: var(--radius-sm); padding: 18px 28px; backdrop-filter: blur(14px); text-align: center; min-width: 110px; transition: transform 0.3s, box-shadow 0.3s; }
+  .hero-card:hover { transform: translateY(-5px); box-shadow: 0 8px 30px rgba(124,92,252,0.25); border-color: rgba(124,92,252,0.4); }
+  .hero-card-num { font-family: 'Rajdhani', sans-serif; font-size: 36px; font-weight: 700; background: linear-gradient(135deg, var(--accent), var(--accent2)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; line-height: 1; }
+  .hero-card-label { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted); margin-top: 4px; }
+  .countdown-wrap { animation: fadeUp 0.9s 0.6s ease both; }
+  .countdown-title { font-size: 12px; letter-spacing: 2px; text-transform: uppercase; color: var(--text-muted); margin-bottom: 14px; }
+  .countdown { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+  .cd-block { background: var(--glass); border: 1px solid var(--glass-border); border-radius: var(--radius-sm); padding: 16px 22px; backdrop-filter: blur(14px); text-align: center; min-width: 80px; position: relative; overflow: hidden; }
+  .cd-block::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, var(--accent), var(--accent2)); }
+  .cd-num { font-family: 'Share Tech Mono', monospace; font-size: 32px; color: #fff; line-height: 1; }
+  .cd-label { font-size: 10px; text-transform: uppercase; letter-spacing: 1.5px; color: var(--text-muted); margin-top: 4px; }
+  @keyframes fadeUp { from{opacity:0;transform:translateY(28px)} to{opacity:1;transform:translateY(0)} }
+
+  /* ===== SECTIONS ===== */
+  section { position: relative; z-index: 10; padding: 80px 24px; max-width: 1200px; margin: 0 auto; }
+  .section-tag { font-family: 'Share Tech Mono', monospace; font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: var(--accent2); margin-bottom: 10px; display: block; }
+  .section-title { font-family: 'Rajdhani', sans-serif; font-size: clamp(28px, 4vw, 44px); font-weight: 700; line-height: 1.1; margin-bottom: 14px; }
+  .section-title span { background: linear-gradient(90deg, var(--accent), var(--accent2)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+  .section-divider { width: 60px; height: 3px; background: linear-gradient(90deg, var(--accent), var(--accent2), var(--accent3)); border-radius: 3px; margin-bottom: 48px; }
+  .section-sep { position: relative; z-index: 10; height: 1px; background: linear-gradient(90deg, transparent, rgba(79,142,247,0.2), rgba(124,92,252,0.2), transparent); margin: 0 24px; }
+
+  /* ===== GLASS CARD ===== */
+  .glass-card { background: var(--glass); border: 1px solid var(--glass-border); border-radius: var(--radius); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); transition: all 0.3s; overflow: hidden; position: relative; }
+  .glass-card::before { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, rgba(255,255,255,0.05) 0%, transparent 60%); pointer-events: none; border-radius: inherit; }
+  .glass-card:hover { border-color: rgba(124,92,252,0.4); box-shadow: 0 12px 40px rgba(124,92,252,0.2); transform: translateY(-4px); }
+
+  /* ===== CHIEF GUEST ===== */
+  .chief-guest-section { text-align: center; }
+  .chief-guest-card { max-width: 480px; margin: 0 auto; padding: 48px 40px; position: relative; }
+  .chief-guest-card::after { content: ''; position: absolute; inset: -1px; border-radius: var(--radius); background: linear-gradient(135deg, var(--accent), var(--accent2), var(--accent3)); z-index: -1; opacity: 0.4; }
+  .guest-avatar { width: 120px; height: 120px; border-radius: 50%; margin: 0 auto 20px; display: flex; align-items: center; justify-content: center; box-shadow: 0 0 30px rgba(124,92,252,0.5); position: relative; overflow: hidden; }
+  .guest-avatar img { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; }
+  .guest-avatar::after { content: ''; position: absolute; inset: -3px; border-radius: 50%; background: linear-gradient(135deg, var(--accent), var(--accent2), var(--accent3)); z-index: -1; animation: spin 6s linear infinite; }
+  @keyframes spin { to{transform:rotate(360deg)} }
+  .guest-label { font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: var(--accent); background: rgba(79,142,247,0.12); border: 1px solid rgba(79,142,247,0.25); border-radius: 20px; padding: 4px 14px; display: inline-block; margin-bottom: 14px; }
+  .guest-name { font-family: 'Rajdhani', sans-serif; font-size: 32px; font-weight: 700; color: #fff; margin-bottom: 6px; }
+  .guest-title { color: var(--text-muted); font-size: 14px; }
+  .guest-event { margin-top: 10px; font-size: 13px; color: var(--gold2); letter-spacing: 1px; }
+
+  /* ===== PATRON ===== */
+  .patron-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; }
+  .patron-card { padding: 28px 24px; text-align: center; }
+  .patron-icon { width: 56px; height: 56px; border-radius: 50%; background: linear-gradient(135deg, var(--accent), var(--accent2)); margin: 0 auto 14px; display: flex; align-items: center; justify-content: center; font-size: 22px; box-shadow: 0 4px 20px rgba(79,142,247,0.3); }
+  .patron-role { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--accent2); margin-bottom: 8px; }
+  .patron-name { font-family: 'Rajdhani', sans-serif; font-size: 18px; font-weight: 700; color: #fff; margin-bottom: 4px; }
+  .patron-dept { font-size: 12px; color: var(--text-muted); }
+
+  /* ===== DEPARTMENTS ===== */
+  .dept-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
+  .dept-card { padding: 28px 24px; position: relative; cursor: pointer; }
+  .dept-num { font-family: 'Share Tech Mono', monospace; font-size: 11px; color: var(--accent2); letter-spacing: 2px; margin-bottom: 8px; }
+  .dept-name { font-family: 'Rajdhani', sans-serif; font-size: 20px; font-weight: 700; color: #fff; margin-bottom: 10px; line-height: 1.2; }
+  .dept-events-count { display: inline-flex; align-items: center; gap: 6px; background: rgba(124,92,252,0.15); border: 1px solid rgba(124,92,252,0.3); border-radius: 20px; padding: 4px 12px; font-size: 12px; color: var(--accent2); font-weight: 600; }
+  .dept-accent { position: absolute; top: 0; right: 0; width: 4px; height: 100%; border-radius: 0 var(--radius) var(--radius) 0; }
+  .dept-card:nth-child(1) .dept-accent { background: linear-gradient(180deg, #4f8ef7, #7c5cfc); }
+  .dept-card:nth-child(2) .dept-accent { background: linear-gradient(180deg, #22d3ee, #4f8ef7); }
+  .dept-card:nth-child(3) .dept-accent { background: linear-gradient(180deg, #c355f5, #7c5cfc); }
+  .dept-card:nth-child(4) .dept-accent { background: linear-gradient(180deg, #f5c518, #f59318); }
+  .dept-card:nth-child(5) .dept-accent { background: linear-gradient(180deg, #f5c518, #22d3ee); }
+  .dept-card:nth-child(6) .dept-accent { background: linear-gradient(180deg, #22d3ee, #c355f5); }
+  .dept-card:nth-child(7) .dept-accent { background: linear-gradient(180deg, #7c5cfc, #4f8ef7); }
+  .dept-card:nth-child(8) .dept-accent { background: linear-gradient(180deg, #c355f5, #f5c518); }
+
+  /* ===== EVENTS ===== */
+  .days-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  .day-card { padding: 36px 32px; }
+  .day-badge { display: inline-flex; align-items: center; gap: 8px; padding: 6px 16px; border-radius: 50px; font-size: 12px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 20px; }
+  .day1-badge { background: rgba(79,142,247,0.15); border: 1px solid rgba(79,142,247,0.35); color: var(--accent); }
+  .day2-badge { background: rgba(195,85,245,0.15); border: 1px solid rgba(195,85,245,0.35); color: var(--accent3); }
+  .day-title { font-family: 'Rajdhani', sans-serif; font-size: 26px; font-weight: 700; color: #fff; margin-bottom: 6px; }
+  .day-date { font-size: 13px; color: var(--gold2); margin-bottom: 24px; letter-spacing: 1px; }
+  .event-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+  .event-list li { display: flex; align-items: center; gap: 12px; font-size: 14px; color: rgba(200,215,255,0.85); padding: 10px 14px; background: rgba(255,255,255,0.04); border-radius: 8px; border: 1px solid rgba(255,255,255,0.07); transition: all 0.2s; }
+  .event-list li:hover { background: rgba(79,142,247,0.1); border-color: rgba(79,142,247,0.25); transform: translateX(4px); }
+  .event-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+  .day1 .event-dot { background: var(--accent); box-shadow: 0 0 6px var(--accent); }
+  .day2 .event-dot { background: var(--accent3); box-shadow: 0 0 6px var(--accent3); }
+  .deadline-note { margin-top: 20px; padding: 12px 16px; background: rgba(245,197,24,0.08); border: 1px solid rgba(245,197,24,0.25); border-radius: 8px; font-size: 12px; color: var(--gold2); display: flex; align-items: center; gap: 8px; }
+
+  /* ===== PASSES ===== */
+  .passes-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; max-width: 800px; margin: 0 auto; }
+  .pass-card { padding: 40px 32px; text-align: center; }
+  .pass-card.featured { border-color: rgba(245,197,24,0.4); box-shadow: 0 0 40px rgba(245,197,24,0.1); }
+  .pass-card.featured::after { content: 'POPULAR'; position: absolute; top: -1px; right: 20px; background: linear-gradient(90deg, var(--gold), var(--gold2)); color: #000; font-size: 9px; font-weight: 800; letter-spacing: 2px; padding: 4px 14px; border-radius: 0 0 8px 8px; }
+  .pass-icon { font-size: 40px; margin-bottom: 16px; }
+  .pass-name { font-family: 'Rajdhani', sans-serif; font-size: 26px; font-weight: 700; color: #fff; margin-bottom: 6px; }
+  .pass-price { font-family: 'Share Tech Mono', monospace; font-size: 42px; color: var(--gold2); text-shadow: 0 0 20px rgba(255,221,87,0.3); margin-bottom: 24px; line-height: 1; }
+  .pass-price sup { font-size: 22px; vertical-align: super; }
+  .pass-features { list-style: none; text-align: left; display: flex; flex-direction: column; gap: 10px; margin-bottom: 28px; }
+  .pass-features li { font-size: 13px; color: rgba(200,215,255,0.8); display: flex; align-items: center; gap: 10px; }
+  .pass-features li::before { content: '✓'; width: 20px; height: 20px; background: rgba(79,142,247,0.2); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 11px; color: var(--accent); flex-shrink: 0; text-align: center; line-height: 20px; }
+  .pass-card.featured .pass-features li::before { background: rgba(245,197,24,0.15); color: var(--gold2); }
+  .btn { display: inline-block; width: 100%; padding: 13px 24px; border-radius: 10px; font-family: 'Rajdhani', sans-serif; font-size: 16px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; text-decoration: none; text-align: center; cursor: pointer; border: none; transition: all 0.3s; }
+  .btn-primary { background: linear-gradient(135deg, var(--accent), var(--accent2)); color: #fff; box-shadow: 0 4px 20px rgba(79,142,247,0.35); }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(79,142,247,0.5); }
+  .btn-gold { background: linear-gradient(135deg, var(--gold), var(--gold2)); color: #000; box-shadow: 0 4px 20px rgba(245,197,24,0.35); }
+  .btn-gold:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(245,197,24,0.5); }
+
+  /* ===== FACULTY ===== */
+  .faculty-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; }
+  .faculty-card { padding: 24px; display: flex; align-items: center; gap: 16px; }
+  .faculty-avatar { width: 50px; height: 50px; border-radius: 50%; background: linear-gradient(135deg, var(--accent2), var(--accent3)); display: flex; align-items: center; justify-content: center; font-family: 'Rajdhani', sans-serif; font-size: 18px; font-weight: 700; color: #fff; flex-shrink: 0; }
+  .faculty-name { font-weight: 600; font-size: 14px; color: #fff; margin-bottom: 4px; }
+  .faculty-phone { font-family: 'Share Tech Mono', monospace; font-size: 13px; color: var(--accent); text-decoration: none; display: flex; align-items: center; gap: 4px; }
+  .faculty-phone:hover { color: var(--accent2); }
+
+  /* ===== CONTACT ===== */
+  .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  .contact-info-card { padding: 36px 32px; }
+  .contact-item { display: flex; align-items: flex-start; gap: 14px; margin-bottom: 24px; }
+  .contact-item:last-child { margin-bottom: 0; }
+  .contact-icon { width: 44px; height: 44px; border-radius: 10px; background: rgba(79,142,247,0.15); border: 1px solid rgba(79,142,247,0.25); display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; }
+  .contact-label { font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--accent); margin-bottom: 4px; }
+  .contact-value { font-size: 14px; color: rgba(200,215,255,0.9); line-height: 1.5; }
+  .contact-value a { color: var(--accent); text-decoration: none; }
+  .contact-value a:hover { color: var(--accent2); }
+  .map-card { border-radius: var(--radius); overflow: hidden; border: 1px solid var(--glass-border); min-height: 320px; }
+  .map-card iframe { width: 100%; height: 100%; min-height: 320px; border: none; display: block; }
+
+  /* ===== FOOTER ===== */
+  footer { position: relative; z-index: 10; background: rgba(2,5,16,0.95); border-top: 1px solid rgba(79,142,247,0.15); padding: 40px 24px 24px; text-align: center; }
+  .footer-logo { font-family: 'Rajdhani', sans-serif; font-size: 32px; font-weight: 700; background: linear-gradient(90deg, var(--accent), var(--accent2)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; letter-spacing: 4px; margin-bottom: 8px; }
+  .footer-inst { font-size: 13px; color: var(--text-muted); margin-bottom: 4px; }
+  .footer-divider { width: 200px; height: 1px; background: rgba(79,142,247,0.2); margin: 20px auto; }
+  .footer-sponsor { font-size: 12px; color: var(--text-muted); margin-bottom: 8px; }
+  .footer-sponsor span { color: var(--accent2); font-weight: 600; }
+  .footer-copy { font-size: 12px; color: rgba(120,140,180,0.5); }
+
+  /* ===== SCROLL REVEAL ===== */
+  .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.6s ease, transform 0.6s ease; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 900px) {
+    .days-grid { grid-template-columns: 1fr; }
+    .passes-grid { grid-template-columns: 1fr; max-width: 400px; }
+    .contact-grid { grid-template-columns: 1fr; }
+    .banner-logo { width: 80px; height: 80px; }
+    .badge-ring { width: 70px; height: 70px; }
+    .badge-grade { font-size: 22px; }
+  }
+  @media (max-width: 640px) {
+    .nav-links { display: none; }
+    .nav-hamburger { display: flex; }
+    .institute-banner { min-height: auto; padding: 14px 16px; gap: 10px; }
+    .banner-logo { width: 55px; height: 55px; }
+    .badge-ring { width: 55px; height: 55px; }
+    .badge-grade { font-size: 18px; }
+    .badge-label { font-size: 8px; }
+    .banner-sub { display: none; }
+    .patron-grid { grid-template-columns: 1fr 1fr; }
+    .faculty-grid { grid-template-columns: 1fr; }
+    .dept-grid { grid-template-columns: 1fr; }
+    section { padding: 60px 16px; }
+    .day-card { padding: 24px 20px; }
+    .pass-card { padding: 28px 20px; }
+    .contact-info-card { padding: 24px 20px; }
+  }
+
+  /* ===== FLOATING REGISTER BUTTON ===== */
+  .float-register {
+    position: fixed; bottom: 28px; right: 28px; z-index: 9999;
+    display: flex; align-items: center; gap: 10px;
+    background: linear-gradient(135deg, var(--accent2), var(--accent3));
+    color: #fff; text-decoration: none;
+    font-family: 'Rajdhani', sans-serif; font-size: 15px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase;
+    padding: 14px 22px; border-radius: 50px;
+    box-shadow: 0 6px 30px rgba(124,92,252,0.55), 0 0 0 0 rgba(124,92,252,0.4);
+    animation: float-pulse 2.5s infinite;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .float-register:hover { transform: translateY(-3px) scale(1.04); box-shadow: 0 10px 40px rgba(124,92,252,0.7); }
+  .float-register .fr-icon { font-size: 18px; }
+  @keyframes float-pulse {
+    0%,100% { box-shadow: 0 6px 30px rgba(124,92,252,0.55), 0 0 0 0 rgba(124,92,252,0.4); }
+    50% { box-shadow: 0 6px 30px rgba(124,92,252,0.55), 0 0 0 10px rgba(124,92,252,0); }
+  }
+
+  /* ===== HERO REGISTER BUTTON ===== */
+  .hero-register-btn {
+    display: inline-flex; align-items: center; gap: 10px;
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    color: #fff; text-decoration: none;
+    font-family: 'Rajdhani', sans-serif; font-size: 18px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase;
+    padding: 16px 40px; border-radius: 50px;
+    box-shadow: 0 6px 30px rgba(79,142,247,0.45);
+    margin-top: 36px; margin-bottom: 16px;
+    transition: all 0.3s;
+    animation: fadeUp 0.9s 0.65s ease both;
+    position: relative; overflow: hidden;
+  }
+  .hero-register-btn::before {
+    content: ''; position: absolute; inset: 0;
+    background: linear-gradient(135deg, rgba(255,255,255,0.15), transparent);
+    opacity: 0; transition: opacity 0.3s;
+  }
+  .hero-register-btn:hover { transform: translateY(-3px); box-shadow: 0 12px 40px rgba(79,142,247,0.65); }
+  .hero-register-btn:hover::before { opacity: 1; }
+  .hero-register-btn .btn-arrow { font-size: 20px; transition: transform 0.3s; }
+  .hero-register-btn:hover .btn-arrow { transform: translateX(4px); }
+
+  @media (max-width: 640px) {
+    .float-register { bottom: 18px; right: 16px; font-size: 13px; padding: 12px 18px; }
+    .float-register .fr-label { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="bg-gradient"></div>
+<canvas id="particle-canvas"></canvas>
+
+<!-- INSTITUTE BANNER -->
+<div class="institute-banner">
+  <div class="banner-logo">
+    <svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="60" cy="60" r="58" stroke="rgba(79,142,247,0.5)" stroke-width="2" fill="rgba(5,11,31,0.8)"/>
+      <circle cx="60" cy="60" r="48" stroke="rgba(124,92,252,0.4)" stroke-width="1.5" fill="none"/>
+      <circle cx="60" cy="60" r="18" fill="rgba(79,142,247,0.2)" stroke="#4f8ef7" stroke-width="2"/>
+      <circle cx="60" cy="60" r="8" fill="#4f8ef7"/>
+      <g stroke="#7c5cfc" stroke-width="2.5" stroke-linecap="round">
+        <line x1="60" y1="34" x2="60" y2="40"/><line x1="60" y1="80" x2="60" y2="86"/>
+        <line x1="34" y1="60" x2="40" y2="60"/><line x1="80" y1="60" x2="86" y2="60"/>
+        <line x1="42.4" y1="42.4" x2="46.6" y2="46.6"/><line x1="73.4" y1="73.4" x2="77.6" y2="77.6"/>
+        <line x1="77.6" y1="42.4" x2="73.4" y2="46.6"/><line x1="46.6" y1="73.4" x2="42.4" y2="77.6"/>
+      </g>
+      <rect x="48" y="54" width="24" height="14" rx="1" fill="rgba(245,197,24,0.15)" stroke="#f5c518" stroke-width="1.5"/>
+      <line x1="60" y1="54" x2="60" y2="68" stroke="#f5c518" stroke-width="1.5"/>
+      <circle cx="30" cy="30" r="2" fill="#4f8ef7" opacity="0.7"/>
+      <circle cx="90" cy="30" r="2" fill="#c355f5" opacity="0.7"/>
+      <circle cx="30" cy="90" r="2" fill="#c355f5" opacity="0.7"/>
+      <circle cx="90" cy="90" r="2" fill="#4f8ef7" opacity="0.7"/>
+    </svg>
+  </div>
+  <div class="developer-credit"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  👩🏻‍💻by Arulbabu CSE-A</div>
+  <div class="banner-center">
+    <div class="banner-institute-name">Sri Ranganathar Institute of Engineering and Technology</div>
+    <div class="banner-sub">(An Autonomous Institution)</div>
+    <div class="banner-divider"></div>
+    <div class="banner-info">
+      Approved by AICTE, New Delhi &nbsp;|&nbsp; Affiliated to Anna University, Chennai<br>
+      Athipalayam, Coimbatore – 641110 &nbsp;|&nbsp; <a href="https://sriet.ac.in" target="_blank" style="color:rgba(79,142,247,0.8);text-decoration:none;">sriet.ac.in</a>
+    </div>
+  </div>
+  <div class="naac-badge">
+    <div class="badge-ring">
+      <div class="badge-inner">
+        <div class="badge-label">NAAC</div>
+        <div class="badge-grade">A+</div>
+        <div class="badge-label">GRADE</div>
+      </div>
+    </div>
+    <div class="badge-text">Accredited</div>
+  </div>
+</div>
+
+<!-- STICKY NAV -->
+<nav class="sticky-nav">
+  <div class="nav-brand">SRISTI 2K26</div>
+  <ul class="nav-links">
+    <li><a href="#home">Home</a></li>
+    <li><a href="#chief-guest">Chief Guest</a></li>
+    <li><a href="#departments">Departments</a></li>
+    <li><a href="#events">Events</a></li>
+    <li><a href="#passes">Passes</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <li><a href="https://docs.google.com/forms/d/e/1FAIpQLSfAbh7NrRnqt6r8WCPY9er4l4lKDhxNhqq0VFgawzX2MFamcQ/viewform" target="_blank" rel="noopener noreferrer" style="background:linear-gradient(135deg,var(--accent2),var(--accent3));color:#fff;border-radius:6px;padding:7px 16px;">Register</a></li>
+  </ul>
+  <button class="nav-hamburger" id="hamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#home" onclick="closeMobile()">Home</a>
+  <a href="#chief-guest" onclick="closeMobile()">Chief Guest</a>
+  <a href="#departments" onclick="closeMobile()">Departments</a>
+  <a href="#events" onclick="closeMobile()">Events</a>
+  <a href="#passes" onclick="closeMobile()">Passes</a>
+  <a href="#contact" onclick="closeMobile()">Contact</a>
+  <a href="https://docs.google.com/forms/d/e/1FAIpQLSfAbh7NrRnqt6r8WCPY9er4l4lKDhxNhqq0VFgawzX2MFamcQ/viewform" target="_blank" rel="noopener noreferrer" onclick="closeMobile()" style="background:linear-gradient(135deg,var(--accent2),var(--accent3));color:#fff;">Register</a>
+</div>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-tag">National Level Event 2026</div>
+  <div class="hero-title">✧ SRISTI ✧</div>
+  <div class="hero-year">2 K 2 6</div>
+  <div class="hero-subtitle">National Level Technical Symposium &amp; Cultural Fest</div>
+  <div class="hero-institute">Sri Ranganathar Institute of Engineering &amp; Technology</div>
+  <div class="hero-badges">
+    <span class="hero-badge">Autonomous Institution</span>
+    <span class="hero-badge">NAAC A+ Grade</span>
+    <span class="hero-badge">NBA Accredited</span>
+  </div>
+  <div class="hero-location">📍 Athipalayam, Coimbatore – 641110</div>
+  <div class="hero-date">March 13 – 14, 2026</div>
+  <div class="hero-cards">
+    <div class="hero-card"><div class="hero-card-num">30+</div><div class="hero-card-label">Events</div></div>
+    <div class="hero-card"><div class="hero-card-num">💰</div><div class="hero-card-label">Cash Prizes</div></div>
+    <div class="hero-card"><div class="hero-card-num">8</div><div class="hero-card-label">Departments</div></div>
+  </div>
+  <div class="countdown-wrap">
+    <div class="countdown-title">⚡ Countdown to March 13, 2026</div>
+    <div class="countdown">
+      <div class="cd-block"><div class="cd-num" id="cd-days">00</div><div class="cd-label">Days</div></div>
+      <div class="cd-block"><div class="cd-num" id="cd-hours">00</div><div class="cd-label">Hours</div></div>
+      <div class="cd-block"><div class="cd-num" id="cd-mins">00</div><div class="cd-label">Minutes</div></div>
+      <div class="cd-block"><div class="cd-num" id="cd-secs">00</div><div class="cd-label">Seconds</div></div>
+    </div>
+  </div>
+  <a href="https://docs.google.com/forms/d/e/1FAIpQLSfAbh7NrRnqt6r8WCPY9er4l4lKDhxNhqq0VFgawzX2MFamcQ/viewform" target="_blank" rel="noopener noreferrer" class="hero-register-btn">
+    <span>🚀</span><span class="fr-label">Register Now for SRISTI 2K26</span><span class="btn-arrow">→</span>
+  </a>
+</section>
+
+<div class="section-sep"></div>
+
+<!-- CHIEF GUEST -->
+<section class="chief-guest-section" id="chief-guest">
+  <span class="section-tag">Special Appearance</span>
+  <h2 class="section-title">Chief <span>Guest</span></h2>
+  <div class="section-divider" style="margin-left:auto;margin-right:auto;"></div>
+  <div class="glass-card chief-guest-card reveal">
+    <div class="guest-avatar">
+      <img src="sindhu.jpg" alt="Ms. Sindhu Nakkalites - Chief Guest">
+    </div>
+    <div class="guest-label">Chief Guest</div>
+    <div class="guest-name">Ms. Sindhu </div>
+    <div class="guest-title">Nakkalites Artist  &amp; Content Creator</div>
+    <div class="guest-event">🎉 Chief Guest for SRISTI 2K26 Cultural Fest</div>
+  </div>
+</section>
+
+<div class="section-sep"></div>
+
+<!-- PATRON -->
+<section id="patron">
+  <span class="section-tag">Leadership</span>
+  <h2 class="section-title">Patron &amp; <span>Convenors</span></h2>
+  <div class="section-divider"></div>
+  <div class="patron-grid">
+    <div class="glass-card patron-card reveal"><div class="patron-icon">👑</div><div class="patron-role">Director</div><div class="patron-name">Tmt. B. Arthi Harikrishna</div></div>
+    <div class="glass-card patron-card reveal"><div class="patron-icon">🎓</div><div class="patron-role">Patron</div><div class="patron-name">Dr. H. Ganesan</div></div>
+    <div class="glass-card patron-card reveal"><div class="patron-icon">⚙️</div><div class="patron-role">Convenor</div><div class="patron-name">Dr. A. Suresh Kumar</div><div class="patron-dept">HOD / Civil Engineering</div></div>
+    <div class="glass-card patron-card reveal"><div class="patron-icon">⚡</div><div class="patron-role">Convenor</div><div class="patron-name">Dr. S. Leenarose</div><div class="patron-dept">HOD / EEE</div></div>
+    <div class="glass-card patron-card reveal"><div class="patron-icon">📡</div><div class="patron-role">Convenor</div><div class="patron-name">Dr. S. Sudha</div><div class="patron-dept">HOD / ECE</div></div>
+  </div>
+</section>
+
+<div class="section-sep"></div>
+
+<!-- DEPARTMENTS -->
+<section id="departments">
+  <span class="section-tag">Participating Departments</span>
+  <h2 class="section-title">8 <span>Departments</span></h2>
+  <div class="section-divider"></div>
+  <div class="dept-grid">
+    <div class="glass-card dept-card reveal"><div class="dept-accent"></div><div class="dept-num">01 / 08</div><div class="dept-name">AI &amp; Data Science</div><span class="dept-events-count">🧠 4 Events</span></div>
+    <div class="glass-card dept-card reveal"><div class="dept-accent"></div><div class="dept-num">02 / 08</div><div class="dept-name">Civil Engineering</div><span class="dept-events-count">🏗️ 3 Events</span></div>
+    <div class="glass-card dept-card reveal"><div class="dept-accent"></div><div class="dept-num">03 / 08</div><div class="dept-name">Computer Science Engineering</div><span class="dept-events-count">💻 3 Events</span></div>
+    <div class="glass-card dept-card reveal"><div class="dept-accent"></div><div class="dept-num">04 / 08</div><div class="dept-name">Electronics &amp; Communication Eng.</div><span class="dept-events-count">📡 3 Events</span></div>
+    <div class="glass-card dept-card reveal"><div class="dept-accent"></div><div class="dept-num">05 / 08</div><div class="dept-name">Electrical &amp; Electronics Eng.</div><span class="dept-events-count">⚡ 3 Events</span></div>
+    <div class="glass-card dept-card reveal"><div class="dept-accent"></div><div class="dept-num">06 / 08</div><div class="dept-name">Information Technology</div><span class="dept-events-count">🌐 4 Events</span></div>
+    <div class="glass-card dept-card reveal"><div class="dept-accent"></div><div class="dept-num">07 / 08</div><div class="dept-name">Mechanical Engineering</div><span class="dept-events-count">⚙️ 3 Events</span></div>
+    <div class="glass-card dept-card reveal"><div class="dept-accent"></div><div class="dept-num">08 / 08</div><div class="dept-name">Science &amp; Humanities</div><span class="dept-events-count">🔬 3 Events</span></div>
+  </div>
+</section>
+
+<div class="section-sep"></div>
+
+<!-- EVENTS -->
+<section id="events">
+  <span class="section-tag">Schedule</span>
+  <h2 class="section-title">Event <span>Programme</span></h2>
+  <div class="section-divider"></div>
+  <div class="days-grid">
+    <div class="glass-card day-card reveal day1">
+      <div class="day-badge day1-badge">⚡ Day 1 — Technical</div>
+      <div class="day-title">Technical Events</div>
+      <div class="day-date">📅 March 13, 2026</div>
+      <ul class="event-list">
+        <li><span class="event-dot"></span>Paper Presentation</li>
+        <li><span class="event-dot"></span>Project Expo</li>
+      </ul>
+      <div class="deadline-note">⚠️ Paper Submission Deadline: <strong style="margin-left:4px;">12 March 2026</strong></div>
+    </div>
+    <div class="glass-card day-card reveal day2">
+      <div class="day-badge day2-badge">🎭 Day 2 — Cultural</div>
+      <div class="day-title">Cultural Fest</div>
+      <div class="day-date">📅 March 14, 2026</div>
+      <ul class="event-list">
+        <li><span class="event-dot"></span>Singing</li>
+        <li><span class="event-dot"></span>Dance – Solo</li>
+        <li><span class="event-dot"></span>Dance – Group <small style="opacity:.6">(max 7 members)</small></li>
+        <li><span class="event-dot"></span>Reelsomania</li>
+        <li><span class="event-dot"></span>Ramp Walk</li>
+        <li><span class="event-dot"></span>Instrument Playing</li>
+        <li><span class="event-dot"></span>Adaptive Dance</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<div class="section-sep"></div>
+
+<!-- PASSES -->
+<section id="passes">
+  <span class="section-tag">Registration</span>
+  <h2 class="section-title">Entry <span>Passes</span></h2>
+  <div class="section-divider"></div>
+  <div class="passes-grid">
+    <div class="glass-card pass-card reveal">
+      <div class="pass-icon">🥈</div>
+      <div class="pass-name">Silver Pass</div>
+      <div class="pass-price"><sup>₹</sup>250</div>
+      <ul class="pass-features">
+        <li>One Day Access</li><li>Refreshment Included</li><li>Lunch Provided</li><li>Certificate of Participation</li><li>Event Kit</li>
+      </ul>
+      <a href="https://docs.google.com/forms/d/e/1FAIpQLSfAbh7NrRnqt6r8WCPY9er4l4lKDhxNhqq0VFgawzX2MFamcQ/viewform" target="_blank" rel="noopener noreferrer" class="btn btn-primary">Register Now</a>
+    </div>
+    <div class="glass-card pass-card featured reveal">
+      <div class="pass-icon">🥇</div>
+      <div class="pass-name">Golden Pass</div>
+      <div class="pass-price"><sup>₹</sup>450</div>
+      <ul class="pass-features">
+        <li>Two Day Access</li><li>Refreshment Included</li><li>Lunch Provided</li><li>Certificate of Participation</li><li>Premium Event Kit</li>
+      </ul>
+      <a href="https://docs.google.com/forms/d/e/1FAIpQLSfAbh7NrRnqt6r8WCPY9er4l4lKDhxNhqq0VFgawzX2MFamcQ/viewform" target="_blank" rel="noopener noreferrer" class="btn btn-gold">Get Golden Pass</a>
+    </div>
+  </div>
+</section>
+
+<div class="section-sep"></div>
+
+<!-- FACULTY -->
+<section id="faculty">
+  <span class="section-tag">Coordinators</span>
+  <h2 class="section-title">Faculty <span>Coordinators</span></h2>
+  <div class="section-divider"></div>
+  <div class="faculty-grid">
+    <div class="glass-card faculty-card reveal"><div class="faculty-avatar">SE</div><div><div class="faculty-name">Dr. S. Eswaran</div><a href="tel:8667246537" class="faculty-phone">📞 8667246537</a></div></div>
+    <div class="glass-card faculty-card reveal"><div class="faculty-avatar">MD</div><div><div class="faculty-name">Mrs. M. Devipriya</div><a href="tel:9952340989" class="faculty-phone">📞 9952340989</a></div></div>
+    <div class="glass-card faculty-card reveal"><div class="faculty-avatar">SP</div><div><div class="faculty-name">Mr. S. Prem Kumar</div><a href="tel:9944334638" class="faculty-phone">📞 9944334638</a></div></div>
+    <div class="glass-card faculty-card reveal"><div class="faculty-avatar">KV</div><div><div class="faculty-name">Mr. K. Vijay Sankar</div><a href="tel:9842232948" class="faculty-phone">📞 9842232948</a></div></div>
+  </div>
+</section>
+
+<div class="section-sep"></div>
+
+<!-- CONTACT -->
+<section id="contact">
+  <span class="section-tag">Get in Touch</span>
+  <h2 class="section-title">Contact <span>Us</span></h2>
+  <div class="section-divider"></div>
+  <div class="contact-grid">
+    <div class="glass-card contact-info-card reveal">
+      <div class="contact-item"><div class="contact-icon">📧</div><div><div class="contact-label">Email</div><div class="contact-value"><a href="mailto:events@sriet.ac.in">events@sriet.ac.in</a></div></div></div>
+      <div class="contact-item"><div class="contact-icon">🌐</div><div><div class="contact-label">Website</div><div class="contact-value"><a href="https://sriet.ac.in" target="_blank">sriet.ac.in</a></div></div></div>
+      <div class="contact-item"><div class="contact-icon">📍</div><div><div class="contact-label">Location</div><div class="contact-value">Sri Ranganathar Institute of Engineering &amp; Technology<br>Athipalayam, Coimbatore – 641110</div></div></div>
+      <div class="contact-item"><div class="contact-icon">📅</div><div><div class="contact-label">Event Dates</div><div class="contact-value">March 13 – 14, 2026</div></div></div>
+    </div>
+    <div class="map-card reveal">
+      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3914.886!2d76.9836018!3d11.1290104!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ba8f73f6b6e1159%3A0xf4abd9e6f1a60e7!2sSri%20Ranganathar%20Institute%20of%20Engineering%20and%20Technology%20(SRIET)!5e0!3m2!1sen!2sin!4v1709000000000!5m2!1sen!2sin" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="SRIET Location"></iframe>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">SRISTI 2K26</div>
+  <div class="footer-inst">Sri Ranganathar Institute of Engineering &amp; Technology</div>
+  <div class="footer-inst" style="font-size:12px;margin-top:2px;">Athipalayam, Coimbatore – 641110</div>
+  <div class="footer-divider"></div>
+  <div class="footer-sponsor">Sponsored by <span>Poorvika</span></div>
+  <div class="footer-copy">© 2026 SRISTI 2K26 · Sri Ranganathar Institute of Engineering &amp; Technology · All Rights Reserved</div>
+</footer>
+
+<script>
+// PARTICLES
+const canvas = document.getElementById('particle-canvas');
+const ctx = canvas.getContext('2d');
+let particles = [], W, H;
+
+function resize() { W = canvas.width = window.innerWidth; H = canvas.height = window.innerHeight; }
+
+class Particle {
+  constructor() { this.reset(); }
+  reset() {
+    this.x = Math.random() * W; this.y = Math.random() * H;
+    this.vx = (Math.random() - 0.5) * 0.4; this.vy = -Math.random() * 0.5 - 0.1;
+    this.r = Math.random() * 2 + 0.5; this.alpha = Math.random() * 0.45 + 0.1;
+    this.color = ['#4f8ef7','#7c5cfc','#c355f5','#22d3ee','#f5c518'][Math.floor(Math.random()*5)];
+    this.life = 0; this.maxLife = Math.random() * 200 + 100;
+  }
+  update() { this.x += this.vx; this.y += this.vy; this.life++; if (this.life > this.maxLife || this.y < 0) this.reset(); }
+  draw() {
+    ctx.save(); ctx.globalAlpha = this.alpha * (1 - this.life / this.maxLife);
+    ctx.fillStyle = this.color; ctx.shadowColor = this.color; ctx.shadowBlur = 6;
+    ctx.beginPath(); ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2); ctx.fill(); ctx.restore();
+  }
+}
+
+function initP() { particles = []; for (let i = 0; i < 90; i++) particles.push(new Particle()); }
+
+function animP() {
+  ctx.clearRect(0, 0, W, H);
+  for (let i = 0; i < particles.length; i++) {
+    for (let j = i+1; j < particles.length; j++) {
+      const dx = particles[i].x - particles[j].x, dy = particles[i].y - particles[j].y;
+      const d = Math.sqrt(dx*dx+dy*dy);
+      if (d < 110) { ctx.save(); ctx.globalAlpha = (1-d/110)*0.06; ctx.strokeStyle='#7c5cfc'; ctx.lineWidth=0.5; ctx.beginPath(); ctx.moveTo(particles[i].x,particles[i].y); ctx.lineTo(particles[j].x,particles[j].y); ctx.stroke(); ctx.restore(); }
+    }
+    particles[i].update(); particles[i].draw();
+  }
+  requestAnimationFrame(animP);
+}
+
+resize(); initP(); animP();
+window.addEventListener('resize', resize);
+
+// COUNTDOWN
+function tick() {
+  const diff = new Date('2026-03-13T09:00:00+05:30') - Date.now();
+  if (diff <= 0) { ['days','hours','mins','secs'].forEach(k => document.getElementById('cd-'+k).textContent='00'); return; }
+  document.getElementById('cd-days').textContent  = String(Math.floor(diff/86400000)).padStart(2,'0');
+  document.getElementById('cd-hours').textContent = String(Math.floor(diff%86400000/3600000)).padStart(2,'0');
+  document.getElementById('cd-mins').textContent  = String(Math.floor(diff%3600000/60000)).padStart(2,'0');
+  document.getElementById('cd-secs').textContent  = String(Math.floor(diff%60000/1000)).padStart(2,'0');
+}
+tick(); setInterval(tick, 1000);
+
+// SCROLL REVEAL
+const obs = new IntersectionObserver(entries => {
+  entries.forEach((e,i) => { if(e.isIntersecting) setTimeout(()=>e.target.classList.add('visible'), i*70); });
+}, {threshold:0.1, rootMargin:'0px 0px -40px 0px'});
+document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+// HAMBURGER
+const hb = document.getElementById('hamburger'), mm = document.getElementById('mobileMenu');
+hb.addEventListener('click', () => mm.classList.toggle('open'));
+function closeMobile() { mm.classList.remove('open'); }
+document.addEventListener('click', e => { if (!hb.contains(e.target) && !mm.contains(e.target)) mm.classList.remove('open'); });
+
+// SMOOTH SCROLL
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    const el = document.getElementById(a.getAttribute('href').slice(1));
+    if (el) { e.preventDefault(); el.scrollIntoView({behavior:'smooth',block:'start'}); }
+  });
+});
+</script>
+
+<a href="https://docs.google.com/forms/d/e/1FAIpQLSfAbh7NrRnqt6r8WCPY9er4l4lKDhxNhqq0VFgawzX2MFamcQ/viewform" target="_blank" rel="noopener noreferrer" class="float-register">
+  <span class="fr-icon">📋</span><span class="fr-label">Register Now</span>
+</a>
+</body>
+</html>
