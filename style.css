@@ -162,13 +162,13 @@ section { position: relative; z-index: 10; padding: 80px 24px; max-width: 1200px
 .dept-name { font-family: 'Rajdhani', sans-serif; font-size: 20px; font-weight: 700; color: #fff; margin-bottom: 10px; line-height: 1.2; }
 .dept-events-count { display: inline-flex; align-items: center; gap: 6px; background: rgba(124,92,252,0.15); border: 1px solid rgba(124,92,252,0.3); border-radius: 20px; padding: 4px 12px; font-size: 12px; color: var(--accent2); font-weight: 600; }
 .dept-accent { position: absolute; top: 0; right: 0; width: 4px; height: 100%; border-radius: 0 var(--radius) var(--radius) 0; }
-.dept-card:nth-child(1) .dept-accent { background: linear-gradient(180deg, #4f8ef7, #7c5cfc); }
-.dept-card:nth-child(2) .dept-accent { background: linear-gradient(180deg, #22d3ee, #4f8ef7); }
-.dept-card:nth-child(3) .dept-accent { background: linear-gradient(180deg, #c355f5, #7c5cfc); }
-.dept-card:nth-child(4) .dept-accent { background: linear-gradient(180deg, #f5c518, #f59318); }
-.dept-card:nth-child(5) .dept-accent { background: linear-gradient(180deg, #f5c518, #22d3ee); }
+.dept-card:nth-child(1) .dept-accent { background: linear-gradient(180deg, #22d3ee, #4f8ef7); }
+.dept-card:nth-child(2) .dept-accent { background: linear-gradient(180deg, #7c5cfc, #4f8ef7); }
+.dept-card:nth-child(3) .dept-accent { background: linear-gradient(180deg, #f5c518, #22d3ee); }
+.dept-card:nth-child(4) .dept-accent { background: linear-gradient(180deg, #c355f5, #7c5cfc); }
+.dept-card:nth-child(5) .dept-accent { background: linear-gradient(180deg, #f5c518, #f59318); }
 .dept-card:nth-child(6) .dept-accent { background: linear-gradient(180deg, #22d3ee, #c355f5); }
-.dept-card:nth-child(7) .dept-accent { background: linear-gradient(180deg, #7c5cfc, #4f8ef7); }
+.dept-card:nth-child(7) .dept-accent { background: linear-gradient(180deg, #4f8ef7, #7c5cfc); }
 .dept-card:nth-child(8) .dept-accent { background: linear-gradient(180deg, #c355f5, #f5c518); }
 
 /* ===== EVENTS ===== */
