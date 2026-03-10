@@ -70,3 +70,14 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
     if (el) { e.preventDefault(); el.scrollIntoView({behavior:'smooth',block:'start'}); }
   });
 });
+
+// DEPARTMENT DETAILS
+function openDept(dept) {
+  document.getElementById('dept-details-container').style.display = 'block';
+  document.querySelectorAll('.dept-details').forEach(d => d.style.display = 'none');
+  document.getElementById('dept-' + dept).style.display = 'block';
+  document.getElementById('dept-' + dept).scrollIntoView({behavior:'smooth'});
+}
+function closeDept() {
+  document.getElementById('dept-details-container').style.display = 'none';
+}

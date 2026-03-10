@@ -161,13 +161,368 @@
   <h2 class="section-title">8 <span>Departments</span></h2>
   <div class="section-divider"></div>
   <div class="dept-grid">
-    <a class="glass-card dept-card reveal" href="https://y6z.8f9.myftpupload.com/civil-engineering/"><div class="dept-accent"></div><div class="dept-num">02 / 08</div><div class="dept-name">Civil Engineering</div><span class="dept-events-count">🏗️ 3 Events</span></a>
-    <a class="glass-card dept-card reveal" href="https://y6z.8f9.myftpupload.com/computer-science-and-engineering/"><div class="dept-accent"></div><div class="dept-num">03 / 08</div><div class="dept-name">Computer Science Engineering</div><span class="dept-events-count">💻 3 Events</span></a>
-    <a class="glass-card dept-card reveal" href="https://y6z.8f9.myftpupload.com/electronics-and-communication-engineering/"><div class="dept-accent"></div><div class="dept-num">04 / 08</div><div class="dept-name">Electronics &amp; Communication Eng.</div><span class="dept-events-count">📡 3 Events</span></a>
-    <a class="glass-card dept-card reveal" href="https://y6z.8f9.myftpupload.com/electrical-and-electronics-engineering/"><div class="dept-accent"></div><div class="dept-num">05 / 08</div><div class="dept-name">Electrical &amp; Electronics Eng.</div><span class="dept-events-count">⚡ 3 Events</span></a>
-    <a class="glass-card dept-card reveal" href="#events"><div class="dept-accent"></div><div class="dept-num">06 / 08</div><div class="dept-name">Information Technology</div><span class="dept-events-count">🌐 4 Events</span></a>
-    <a class="glass-card dept-card reveal" href="https://y6z.8f9.myftpupload.com/department-of-mechanical-engineering/s"><div class="dept-accent"></div><div class="dept-num">07 / 08</div><div class="dept-name">Mechanical Engineering</div><span class="dept-events-count">⚙️ 3 Events</span></a>
-    <a class="glass-card dept-card reveal" href="#events"><div class="dept-accent"></div><div class="dept-num">08 / 08</div><div class="dept-name">Artificial Intelligence and Data Science</div><span class="dept-events-count">🔬 3 Events</span></a>
+    <div class="glass-card dept-card reveal" onclick="openDept('civil')"><div class="dept-accent"></div><div class="dept-num">01 / 08</div><div class="dept-name">Civil Engineering</div><span class="dept-events-count">🏗️ 3 Events</span></div>
+    <div class="glass-card dept-card reveal" onclick="openDept('cse')"><div class="dept-accent"></div><div class="dept-num">02 / 08</div><div class="dept-name">Computer Science Engineering</div><span class="dept-events-count">💻 3 Events</span></div>
+    <div class="glass-card dept-card reveal" onclick="openDept('ece')"><div class="dept-accent"></div><div class="dept-num">03 / 08</div><div class="dept-name">Electronics &amp; Communication Eng.</div><span class="dept-events-count">📡 3 Events</span></div>
+    <div class="glass-card dept-card reveal" onclick="openDept('eee')"><div class="dept-accent"></div><div class="dept-num">04 / 08</div><div class="dept-name">Electrical &amp; Electronics Eng.</div><span class="dept-events-count">⚡ 3 Events</span></div>
+    <div class="glass-card dept-card reveal" onclick="openDept('it')"><div class="dept-accent"></div><div class="dept-num">05 / 08</div><div class="dept-name">Information Technology</div><span class="dept-events-count">🌐 4 Events</span></div>
+    <div class="glass-card dept-card reveal" onclick="openDept('mech')"><div class="dept-accent"></div><div class="dept-num">06 / 08</div><div class="dept-name">Mechanical Engineering</div><span class="dept-events-count">⚙️ 3 Events</span></div>
+    <div class="glass-card dept-card reveal" onclick="openDept('aids')"><div class="dept-accent"></div><div class="dept-num">07 / 08</div><div class="dept-name">Artificial Intelligence and Data Science</div><span class="dept-events-count">🔬 3 Events</span></div>
+    <div class="glass-card dept-card reveal" onclick="openDept('sh')"><div class="dept-accent"></div><div class="dept-num">08 / 08</div><div class="dept-name">Science and Humanities</div><span class="dept-events-count">🔬 3 Events</span></div>
+  </div>
+  <div id="dept-details-container" class="dept-details-container">
+    <div id="dept-civil" class="dept-details" style="display:none;">
+      <button class="back-btn" onclick="closeDept()">← Back to Departments</button>
+      <div class="dept-top">
+        <div class="dept-icon">🏗️</div>
+        <h2 class="dept-heading">Civil Engineering</h2>
+        <p class="dept-subtitle">Building the Future</p>
+      </div>
+      <div class="coordinators">
+        <div class="glass-card coord-card">
+          <h3>Faculty Coordinator</h3>
+          <div class="coord-name">Mrs. M. P. Meera</div>
+          <div class="coord-role">Asst. Professor – CIVIL</div>
+          <div class="coord-contact">
+            <a href="tel:7812982030">📞</a>
+            <a href="mailto:faculty@sriet.ac.in">📧</a>
+          </div>
+        </div>
+        <div class="glass-card coord-card">
+          <h3>Student Coordinator</h3>
+          <div class="coord-name">Mr. RK. Hemanth</div>
+          <div class="coord-role">Student Coordinator – III/CIVIL</div>
+          <div class="coord-contact">
+            <a href="tel:9179087003">📞</a>
+            <a href="mailto:student@sriet.ac.in">📧</a>
+          </div>
+        </div>
+      </div>
+      <div class="dept-events">
+        <h3>Civil Events</h3>
+        <ul>
+          <li>Model the Wonder — Technical</li>
+          <li>CADD Modelling — Technical</li>
+          <li>Code Cracking — Technical</li>
+        </ul>
+        <h4>Common Events</h4>
+        <div class="common-events">
+          <button onclick="window.open('https://docs.google.com/forms/d/e/1FAIpQLSfAbh7NrRnqt6r8WCPY9er4l4lKDhxNhqq0VFgawzX2MFamcQ/viewform', '_blank')">Paper Presentation</button>
+          <button onclick="window.open('https://docs.google.com/forms/d/e/1FAIpQLSfAbh7NrRnqt6r8WCPY9er4l4lKDhxNhqq0VFgawzX2MFamcQ/viewform', '_blank')">Project Expo</button>
+        </div>
+      </div>
+      <div class="registration">
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLSfAbh7NrRnqt6r8WCPY9er4l4lKDhxNhqq0VFgawzX2MFamcQ/viewform" target="_blank" class="btn btn-primary">Register Now</a>
+      </div>
+    </div>
+    <div id="dept-cse" class="dept-details" style="display:none;">
+      <button class="back-btn" onclick="closeDept()">← Back to Departments</button>
+      <div class="dept-top">
+        <div class="dept-icon">💻</div>
+        <h2 class="dept-heading">Computer Science Engineering</h2>
+        <p class="dept-subtitle">Innovating with Code</p>
+      </div>
+      <div class="coordinators">
+        <div class="glass-card coord-card">
+          <h3>Faculty Coordinator</h3>
+          <div class="coord-name">Mr. C. Mahesh</div>
+          <div class="coord-role">Asst. Professor – CSE</div>
+          <div class="coord-contact">
+            <a href="tel:8508126946">📞</a>
+            <a href="mailto:faculty@sriet.ac.in">📧</a>
+          </div>
+        </div>
+        <div class="glass-card coord-card">
+          <h3>Student Coordinator</h3>
+          <div class="coord-name">Mr. D. Rohan</div>
+          <div class="coord-role">Student Coordinator – III/CSE</div>
+          <div class="coord-contact">
+            <a href="tel:7397668478">📞</a>
+            <a href="mailto:student@sriet.ac.in">📧</a>
+          </div>
+        </div>
+      </div>
+      <div class="dept-events">
+        <h3>CSE Events</h3>
+        <ul>
+          <li>Capture the Flag — Technical</li>
+          <li>Code Debugging — Technical</li>
+          <li>Dumb Charades — Non-Technical</li>
+        </ul>
+        <h4>Common Events</h4>
+        <div class="common-events">
+          <button onclick="window.open('https://docs.google.com/forms/d/e/1FAIpQLSfAbh7NrRnqt6r8WCPY9er4l4lKDhxNhqq0VFgawzX2MFamcQ/viewform', '_blank')">Paper Presentation</button>
+          <button onclick="window.open('https://docs.google.com/forms/d/e/1FAIpQLSfAbh7NrRnqt6r8WCPY9er4l4lKDhxNhqq0VFgawzX2MFamcQ/viewform', '_blank')">Project Expo</button>
+        </div>
+      </div>
+      <div class="registration">
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLSfAbh7NrRnqt6r8WCPY9er4l4lKDhxNhqq0VFgawzX2MFamcQ/viewform" target="_blank" class="btn btn-primary">Register Now</a>
+      </div>
+    </div>
+    <div id="dept-ece" class="dept-details" style="display:none;">
+      <button class="back-btn" onclick="closeDept()">← Back to Departments</button>
+      <div class="dept-top">
+        <div class="dept-icon">📡</div>
+        <h2 class="dept-heading">Electronics & Communication Engineering</h2>
+        <p class="dept-subtitle">Connecting the World</p>
+      </div>
+      <div class="coordinators">
+        <div class="glass-card coord-card">
+          <h3>Faculty Coordinator</h3>
+          <div class="coord-name">Mr. A. Periyanan</div>
+          <div class="coord-role">Asst. Professor – ECE</div>
+          <div class="coord-contact">
+            <a href="tel:7502619576">📞</a>
+            <a href="mailto:faculty@sriet.ac.in">📧</a>
+          </div>
+        </div>
+        <div class="glass-card coord-card">
+          <h3>Student Coordinator</h3>
+          <div class="coord-name">Mr. G. Kalidasan</div>
+          <div class="coord-role">Student Coordinator – III/ECE</div>
+          <div class="coord-contact">
+            <a href="tel:9845546603">📞</a>
+            <a href="mailto:student@sriet.ac.in">📧</a>
+          </div>
+        </div>
+      </div>
+      <div class="dept-events">
+        <h3>ECE Events</h3>
+        <ul>
+          <li>1 Minute Engineer — Technical</li>
+          <li>3D Show — Technical</li>
+          <li>Start Music — Non-Technical</li>
+        </ul>
+        <h4>Common Events</h4>
+        <div class="common-events">
+          <button onclick="window.open('https://docs.google.com/forms/d/e/1FAIpQLSfAbh7NrRnqt6r8WCPY9er4l4lKDhxNhqq0VFgawzX2MFamcQ/viewform', '_blank')">Paper Presentation</button>
+          <button onclick="window.open('https://docs.google.com/forms/d/e/1FAIpQLSfAbh7NrRnqt6r8WCPY9er4l4lKDhxNhqq0VFgawzX2MFamcQ/viewform', '_blank')">Project Expo</button>
+        </div>
+      </div>
+      <div class="registration">
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLSfAbh7NrRnqt6r8WCPY9er4l4lKDhxNhqq0VFgawzX2MFamcQ/viewform" target="_blank" class="btn btn-primary">Register Now</a>
+      </div>
+    </div>
+    <div id="dept-eee" class="dept-details" style="display:none;">
+      <button class="back-btn" onclick="closeDept()">← Back to Departments</button>
+      <div class="dept-top">
+        <div class="dept-icon">⚡</div>
+        <h2 class="dept-heading">Electrical & Electronics Engineering</h2>
+        <p class="dept-subtitle">Powering Innovation</p>
+      </div>
+      <div class="coordinators">
+        <div class="glass-card coord-card">
+          <h3>Faculty Coordinator</h3>
+          <div class="coord-name">Mr. D. Palanivel</div>
+          <div class="coord-role">Asst. Professor – EEE</div>
+          <div class="coord-contact">
+            <a href="tel:9790333263">📞</a>
+            <a href="mailto:faculty@sriet.ac.in">📧</a>
+          </div>
+        </div>
+        <div class="glass-card coord-card">
+          <h3>Student Coordinator</h3>
+          <div class="coord-name">Mr. J. Nevin</div>
+          <div class="coord-role">Student Coordinator – III/EEE</div>
+          <div class="coord-contact">
+            <a href="tel:9342384875">📞</a>
+            <a href="mailto:student@sriet.ac.in">📧</a>
+          </div>
+        </div>
+      </div>
+      <div class="dept-events">
+        <h3>EEE Events</h3>
+        <ul>
+          <li>Bomb Squad — Technical</li>
+          <li>Mindscape Rumble — Technical</li>
+          <li>IPL Auction — Non-Technical</li>
+        </ul>
+        <h4>Common Events</h4>
+        <div class="common-events">
+          <button onclick="window.open('https://docs.google.com/forms/d/e/1FAIpQLSfAbh7NrRnqt6r8WCPY9er4l4lKDhxNhqq0VFgawzX2MFamcQ/viewform', '_blank')">Paper Presentation</button>
+          <button onclick="window.open('https://docs.google.com/forms/d/e/1FAIpQLSfAbh7NrRnqt6r8WCPY9er4l4lKDhxNhqq0VFgawzX2MFamcQ/viewform', '_blank')">Project Expo</button>
+        </div>
+      </div>
+      <div class="registration">
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLSfAbh7NrRnqt6r8WCPY9er4l4lKDhxNhqq0VFgawzX2MFamcQ/viewform" target="_blank" class="btn btn-primary">Register Now</a>
+      </div>
+    </div>
+    <div id="dept-it" class="dept-details" style="display:none;">
+      <button class="back-btn" onclick="closeDept()">← Back to Departments</button>
+      <div class="dept-top">
+        <div class="dept-icon">🌐</div>
+        <h2 class="dept-heading">Information Technology</h2>
+        <p class="dept-subtitle">Tech for Tomorrow</p>
+      </div>
+      <div class="coordinators">
+        <div class="glass-card coord-card">
+          <h3>Faculty Coordinator</h3>
+          <div class="coord-name">Mrs. M. Divya</div>
+          <div class="coord-role">Asst. Professor – IT</div>
+          <div class="coord-contact">
+            <a href="tel:8296452337">📞</a>
+            <a href="mailto:faculty@sriet.ac.in">📧</a>
+          </div>
+        </div>
+        <div class="glass-card coord-card">
+          <h3>Student Coordinator</h3>
+          <div class="coord-name">Mr. A. Madhan</div>
+          <div class="coord-role">Student Coordinator – III/IT</div>
+          <div class="coord-contact">
+            <a href="tel:9342061813">📞</a>
+            <a href="mailto:student@sriet.ac.in">📧</a>
+          </div>
+        </div>
+      </div>
+      <div class="dept-events">
+        <h3>IT Events</h3>
+        <ul>
+          <li>Blindrix — Technical</li>
+          <li>Techwhiz — Technical</li>
+          <li>Typing Thunder — Non-Technical</li>
+          <li>Creativity Fest — Non-Technical</li>
+          <li>E-Sports — Non-Technical</li>
+        </ul>
+        <h4>Common Events</h4>
+        <div class="common-events">
+          <button onclick="window.open('https://docs.google.com/forms/d/e/1FAIpQLSfAbh7NrRnqt6r8WCPY9er4l4lKDhxNhqq0VFgawzX2MFamcQ/viewform', '_blank')">Paper Presentation</button>
+          <button onclick="window.open('https://docs.google.com/forms/d/e/1FAIpQLSfAbh7NrRnqt6r8WCPY9er4l4lKDhxNhqq0VFgawzX2MFamcQ/viewform', '_blank')">Project Expo</button>
+        </div>
+      </div>
+      <div class="registration">
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLSfAbh7NrRnqt6r8WCPY9er4l4lKDhxNhqq0VFgawzX2MFamcQ/viewform" target="_blank" class="btn btn-primary">Register Now</a>
+      </div>
+    </div>
+    <div id="dept-mech" class="dept-details" style="display:none;">
+      <button class="back-btn" onclick="closeDept()">← Back to Departments</button>
+      <div class="dept-top">
+        <div class="dept-icon">⚙️</div>
+        <h2 class="dept-heading">Mechanical Engineering</h2>
+        <p class="dept-subtitle">Engineering Excellence</p>
+      </div>
+      <div class="coordinators">
+        <div class="glass-card coord-card">
+          <h3>Faculty Coordinator</h3>
+          <div class="coord-name">Mr. S. M. Deivasikamoni</div>
+          <div class="coord-role">Asst. Professor – MECH</div>
+          <div class="coord-contact">
+            <a href="tel:9047405801">📞</a>
+            <a href="mailto:faculty@sriet.ac.in">📧</a>
+          </div>
+        </div>
+        <div class="glass-card coord-card">
+          <h3>Student Coordinator</h3>
+          <div class="coord-name">Mr. Manivel</div>
+          <div class="coord-role">Student Coordinator – III/MECH</div>
+          <div class="coord-contact">
+            <a href="tel:9524882761">📞</a>
+            <a href="mailto:student@sriet.ac.in">📧</a>
+          </div>
+        </div>
+      </div>
+      <div class="dept-events">
+        <h3>Mechanical Events</h3>
+        <ul>
+          <li>Mechanical Quiz — Technical</li>
+          <li>Tool Finder — Technical</li>
+          <li>CADD Modelling — Technical</li>
+        </ul>
+        <h4>Common Events</h4>
+        <div class="common-events">
+          <button onclick="window.open('https://docs.google.com/forms/d/e/1FAIpQLSfAbh7NrRnqt6r8WCPY9er4l4lKDhxNhqq0VFgawzX2MFamcQ/viewform', '_blank')">Paper Presentation</button>
+          <button onclick="window.open('https://docs.google.com/forms/d/e/1FAIpQLSfAbh7NrRnqt6r8WCPY9er4l4lKDhxNhqq0VFgawzX2MFamcQ/viewform', '_blank')">Project Expo</button>
+        </div>
+      </div>
+      <div class="registration">
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLSfAbh7NrRnqt6r8WCPY9er4l4lKDhxNhqq0VFgawzX2MFamcQ/viewform" target="_blank" class="btn btn-primary">Register Now</a>
+      </div>
+    </div>
+    <div id="dept-aids" class="dept-details" style="display:none;">
+      <button class="back-btn" onclick="closeDept()">← Back to Departments</button>
+      <div class="dept-top">
+        <div class="dept-icon">🔬</div>
+        <h2 class="dept-heading">Artificial Intelligence and Data Science</h2>
+        <p class="dept-subtitle">AI for the Future</p>
+      </div>
+      <div class="coordinators">
+        <div class="glass-card coord-card">
+          <h3>Faculty Coordinator</h3>
+          <div class="coord-name">Dr. J. Nithya</div>
+          <div class="coord-role">Asst. Professor – AI&DS</div>
+          <div class="coord-contact">
+            <a href="mailto:faculty@sriet.ac.in">📧</a>
+          </div>
+        </div>
+        <div class="glass-card coord-card">
+          <h3>Student Coordinator</h3>
+          <div class="coord-name">Ms. V. Shanthi Aiswarya</div>
+          <div class="coord-role">Student Coordinator – III/AI&DS</div>
+          <div class="coord-contact">
+            <a href="mailto:student@sriet.ac.in">📧</a>
+          </div>
+        </div>
+      </div>
+      <div class="dept-events">
+        <h3>AI & DS Events</h3>
+        <ul>
+          <li>Cyber Squad — Technical</li>
+          <li>Tackle the Idea — Technical</li>
+          <li>Memezzo — Non-Technical</li>
+          <li>IPL Auction — Non-Technical</li>
+          <li>Spot the Lie — Non-Technical</li>
+        </ul>
+        <h4>Common Events</h4>
+        <div class="common-events">
+          <button onclick="window.open('https://docs.google.com/forms/d/e/1FAIpQLSfAbh7NrRnqt6r8WCPY9er4l4lKDhxNhqq0VFgawzX2MFamcQ/viewform', '_blank')">Paper Presentation</button>
+          <button onclick="window.open('https://docs.google.com/forms/d/e/1FAIpQLSfAbh7NrRnqt6r8WCPY9er4l4lKDhxNhqq0VFgawzX2MFamcQ/viewform', '_blank')">Project Expo</button>
+        </div>
+      </div>
+      <div class="registration">
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLSfAbh7NrRnqt6r8WCPY9er4l4lKDhxNhqq0VFgawzX2MFamcQ/viewform" target="_blank" class="btn btn-primary">Register Now</a>
+      </div>
+    </div>
+    <div id="dept-sh" class="dept-details" style="display:none;">
+      <button class="back-btn" onclick="closeDept()">← Back to Departments</button>
+      <div class="dept-top">
+        <div class="dept-icon">📚</div>
+        <h2 class="dept-heading">Science and Humanities</h2>
+        <p class="dept-subtitle">Knowledge and Culture</p>
+      </div>
+      <div class="coordinators">
+        <div class="glass-card coord-card">
+          <h3>Faculty Coordinator</h3>
+          <div class="coord-name">Dr. R. Gopalakrishnan</div>
+          <div class="coord-role">Asst. Professor – S&H</div>
+          <div class="coord-contact">
+            <a href="mailto:faculty@sriet.ac.in">📧</a>
+          </div>
+        </div>
+        <div class="glass-card coord-card">
+          <h3>Student Coordinator</h3>
+          <div class="coord-name">Mr. Robinson</div>
+          <div class="coord-role">Student Coordinator – I/ECE</div>
+          <div class="coord-contact">
+            <a href="mailto:student@sriet.ac.in">📧</a>
+          </div>
+        </div>
+      </div>
+      <div class="dept-events">
+        <h3>S&H Events</h3>
+        <ul>
+          <li>Photography — Creative</li>
+          <li>Treasure Hunt — Non-Technical</li>
+          <li>E-Games — Non-Technical</li>
+        </ul>
+        <h4>Common Events</h4>
+        <div class="common-events">
+          <button onclick="window.open('https://docs.google.com/forms/d/e/1FAIpQLSfAbh7NrRnqt6r8WCPY9er4l4lKDhxNhqq0VFgawzX2MFamcQ/viewform', '_blank')">Paper Presentation</button>
+          <button onclick="window.open('https://docs.google.com/forms/d/e/1FAIpQLSfAbh7NrRnqt6r8WCPY9er4l4lKDhxNhqq0VFgawzX2MFamcQ/viewform', '_blank')">Project Expo</button>
+        </div>
+      </div>
+      <div class="registration">
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLSfAbh7NrRnqt6r8WCPY9er4l4lKDhxNhqq0VFgawzX2MFamcQ/viewform" target="_blank" class="btn btn-primary">Register Now</a>
+      </div>
+    </div>
   </div>
 </section>
 

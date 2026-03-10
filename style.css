@@ -156,7 +156,8 @@ section { position: relative; z-index: 10; padding: 80px 24px; max-width: 1200px
 
 /* ===== DEPARTMENTS ===== */
 .dept-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
-.dept-card { padding: 28px 24px; position: relative; cursor: pointer; }
+.dept-card { padding: 28px 24px; position: relative; cursor: pointer; transition: transform 0.3s ease, box-shadow 0.3s ease; }
+.dept-card:hover { transform: scale(1.05); box-shadow: 0 0 20px var(--accent); }
 .dept-num { font-family: 'Share Tech Mono', monospace; font-size: 11px; color: var(--accent2); letter-spacing: 2px; margin-bottom: 8px; }
 .dept-name { font-family: 'Rajdhani', sans-serif; font-size: 20px; font-weight: 700; color: #fff; margin-bottom: 10px; line-height: 1.2; }
 .dept-events-count { display: inline-flex; align-items: center; gap: 6px; background: rgba(124,92,252,0.15); border: 1px solid rgba(124,92,252,0.3); border-radius: 20px; padding: 4px 12px; font-size: 12px; color: var(--accent2); font-weight: 600; }
@@ -311,4 +312,41 @@ footer { position: relative; z-index: 10; background: rgba(2,5,16,0.95); border-
   .day-card { padding: 24px 20px; }
   .pass-card { padding: 28px 20px; }
   .contact-info-card { padding: 24px 20px; }
+}
+
+/* ===== DEPARTMENT DETAILS ===== */
+.dept-details-container { max-width: 1200px; margin: 0 auto; padding: 20px; }
+.dept-details { animation: fadeIn 0.5s ease; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+.back-btn { background: linear-gradient(135deg, var(--accent2), var(--accent3)); color: #fff; border: none; padding: 10px 20px; border-radius: 8px; cursor: pointer; font-weight: 600; margin-bottom: 20px; transition: transform 0.2s; }
+.back-btn:hover { transform: scale(1.05); }
+.dept-top { text-align: center; margin-bottom: 40px; }
+.dept-icon { font-size: 60px; margin-bottom: 10px; }
+.dept-heading { font-family: 'Rajdhani', sans-serif; font-size: 36px; font-weight: 700; background: linear-gradient(90deg, var(--accent), var(--accent2)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 10px; }
+.dept-subtitle { font-size: 18px; color: var(--text-muted); }
+.coordinators { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-bottom: 40px; }
+.coord-card { padding: 24px; text-align: center; }
+.coord-card h3 { font-size: 18px; color: var(--accent2); margin-bottom: 10px; }
+.coord-name { font-family: 'Rajdhani', sans-serif; font-size: 20px; font-weight: 700; color: #fff; margin-bottom: 5px; }
+.coord-role { font-size: 14px; color: var(--text-muted); margin-bottom: 15px; }
+.coord-contact { display: flex; justify-content: center; gap: 20px; }
+.coord-contact a { font-size: 24px; color: var(--accent); transition: color 0.2s; }
+.coord-contact a:hover { color: var(--accent2); }
+.dept-events { margin-bottom: 40px; }
+.dept-events h3 { font-family: 'Rajdhani', sans-serif; font-size: 24px; color: #fff; margin-bottom: 20px; }
+.dept-events ul { list-style: none; padding: 0; }
+.dept-events li { background: var(--glass); border: 1px solid var(--glass-border); border-radius: 8px; padding: 12px 16px; margin-bottom: 10px; color: #fff; }
+.dept-events h4 { font-size: 18px; color: var(--accent2); margin: 20px 0 10px; }
+.common-events { display: flex; gap: 10px; flex-wrap: wrap; }
+.common-events button { background: linear-gradient(135deg, var(--accent), var(--accent2)); color: #fff; border: none; padding: 10px 20px; border-radius: 8px; cursor: pointer; font-weight: 600; transition: transform 0.2s; }
+.common-events button:hover { transform: scale(1.05); }
+.registration { text-align: center; }
+.registration a { display: inline-block; margin-top: 20px; }
+
+@media (max-width: 640px) {
+  .dept-details-container { padding: 10px; }
+  .dept-heading { font-size: 28px; }
+  .coordinators { grid-template-columns: 1fr; }
+  .coord-contact { gap: 15px; }
+  .common-events { justify-content: center; }
 }
