@@ -335,7 +335,11 @@ footer { position: relative; z-index: 10; background: rgba(2,5,16,0.95); border-
 .dept-events { margin-bottom: 40px; }
 .dept-events h3 { font-family: 'Rajdhani', sans-serif; font-size: 24px; color: #fff; margin-bottom: 20px; }
 .dept-events ul { list-style: none; padding: 0; }
-.dept-events li { background: var(--glass); border: 1px solid var(--glass-border); border-radius: 8px; padding: 12px 16px; margin-bottom: 10px; color: #fff; }
+.dept-events li { background: var(--glass); border: 1px solid var(--glass-border); border-radius: 8px; padding: 12px 16px; margin-bottom: 10px; color: #fff; display: flex; justify-content: space-between; align-items: center; }
+.badge { padding: 4px 8px; border-radius: 12px; font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; }
+.badge.technical { background: linear-gradient(135deg, #22d3ee, #4f8ef7); color: #fff; box-shadow: 0 0 10px rgba(34, 211, 238, 0.5); }
+.badge.non-technical { background: linear-gradient(135deg, #c355f5, #7c5cfc); color: #fff; box-shadow: 0 0 10px rgba(195, 85, 245, 0.5); }
+.badge.creative { background: linear-gradient(135deg, #f5c518, #f59318); color: #fff; box-shadow: 0 0 10px rgba(245, 197, 24, 0.5); }
 .dept-events h4 { font-size: 18px; color: var(--accent2); margin: 20px 0 10px; }
 .common-events { display: flex; gap: 10px; flex-wrap: wrap; }
 .common-events button { background: linear-gradient(135deg, var(--accent), var(--accent2)); color: #fff; border: none; padding: 10px 20px; border-radius: 8px; cursor: pointer; font-weight: 600; transition: transform 0.2s; }
